@@ -407,6 +407,8 @@ void DebuggerItemManager::autoDetectCdbDebugger()
         }
     }
 
+    cdbs.append(FileName::fromString(QString::fromLocal8Bit(qgetenv("CDB_EXEC"))));
+
     foreach (const FileName &cdb, cdbs) {
         if (findByCommand(cdb))
             continue;
