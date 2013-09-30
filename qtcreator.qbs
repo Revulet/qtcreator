@@ -1,7 +1,7 @@
 import qbs.base 1.0
 
 Project {
-    property bool withAutotests: qbs.buildVariant === "debug"
+    property bool withAutotests: false
     property string ide_version_major: '2'
     property string ide_version_minor: '8'
     property string ide_version_release: '81'
@@ -41,7 +41,7 @@ Project {
     property string ide_bin_path: qbs.targetOS.contains("osx")
             ? ide_app_target + ".app/Contents/MacOS"
             : ide_app_path
-    property bool testsEnabled: qbs.getenv("TEST") || qbs.buildVariant === "debug"
+    property bool testsEnabled: qbs.getenv("TEST")
     property stringList generalDefines: [
         "QT_CREATOR",
         'IDE_LIBRARY_BASENAME="lib"',
@@ -53,9 +53,6 @@ Project {
 
     references: [
         "src/src.qbs",
-        "lib/qtcreator/qtcomponents/qtcomponents.qbs",
         "share/share.qbs",
-        "share/qtcreator/translations/translations.qbs",
-        "tests/tests.qbs"
     ]
 }

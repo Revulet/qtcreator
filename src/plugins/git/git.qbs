@@ -75,6 +75,7 @@ QtcPlugin {
     ]
 
     Group {
+        condition: false
         name: "Gitorious"
         prefix: "gitorious/"
         files: [
@@ -99,6 +100,7 @@ QtcPlugin {
     }
 
     Group {
+        condition: false
         name: "Gerrit"
         prefix: "gerrit/"
         files: [
