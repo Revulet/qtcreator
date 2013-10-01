@@ -1,11 +1,5 @@
 TEMPLATE = subdirs
 
-SUBDIRS = qtpromaker \
-     qmlpuppet \
-     ../plugins/cpaster/frontend \
-     sdktool \
-     valgrindfake
-
 win32 {
     SUBDIRS += qtcdebugger
     SUBDIRS += wininterrupt

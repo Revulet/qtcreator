@@ -13,56 +13,29 @@ SUBDIRS   = \
     bookmarks \
     projectexplorer \
     vcsbase \
-    perforce \
-    subversion \
     git \
-    cvs \
     cpptools \
     qtsupport \
-    qt4projectmanager \
     locator \
     debugger \
     help \
-    cpaster \
     cmakeprojectmanager \
-    autotoolsprojectmanager \
-    fakevim \
-    designer \
     resourceeditor \
     genericprojectmanager \
     qmljseditor \
     qmlprojectmanager \
-    glsleditor \
-    pythoneditor \
-    mercurial \
-    bazaar \
     classview \
-    tasklist \
     analyzerbase \
     qmljstools \
     macros \
-    remotelinux \
-    android \
-    madde \
-    valgrind \
-    todo \
-    qnx \
-    clearcase \
-    baremetal
+    todo
+
+!win32:SUBDIRS += valgrind
 
 isEmpty(QBS_INSTALL_DIR): QBS_INSTALL_DIR = $$(QBS_INSTALL_DIR)
 exists(../shared/qbs/qbs.pro)|!isEmpty(QBS_INSTALL_DIR): \
     SUBDIRS += \
         qbsprojectmanager
-
-isEmpty(IDE_PACKAGE_MODE) {
-    SUBDIRS += \
-        helloworld \
-        updateinfo
-} else:!isEmpty(UPDATEINFO_ENABLE) {
-    SUBDIRS += \
-        updateinfo
-}
 
 minQtVersion(5, 1, 0) {
     SUBDIRS += \
