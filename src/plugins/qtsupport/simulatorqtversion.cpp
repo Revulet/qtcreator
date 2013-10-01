@@ -28,23 +28,23 @@
 ****************************************************************************/
 
 #include "simulatorqtversion.h"
+#include "qtsupportconstants.h"
 
-#include <qtsupport/qtsupportconstants.h>
 #include <coreplugin/featureprovider.h>
 
 #include <QCoreApplication>
 
-using namespace Qt4ProjectManager;
-using namespace Qt4ProjectManager::Internal;
+using namespace QtSupport;
+using namespace QtSupport::Internal;
 
 SimulatorQtVersion::SimulatorQtVersion()
-    : QtSupport::BaseQtVersion()
+    : BaseQtVersion()
 {
 
 }
 
 SimulatorQtVersion::SimulatorQtVersion(const Utils::FileName &path, bool isAutodetected, const QString &autodetectionSource)
-    : QtSupport::BaseQtVersion(path, isAutodetected, autodetectionSource)
+    : BaseQtVersion(path, isAutodetected, autodetectionSource)
 {
     setDisplayName(defaultDisplayName(qtVersionString(), path, false));
 }
@@ -61,15 +61,15 @@ SimulatorQtVersion *SimulatorQtVersion::clone() const
 
 QString SimulatorQtVersion::type() const
 {
-    return QLatin1String(QtSupport::Constants::SIMULATORQT);
+    return QLatin1String(Constants::SIMULATORQT);
 }
 
 QStringList SimulatorQtVersion::warningReason() const
 {
     QStringList ret = BaseQtVersion::warningReason();
-    if (qtVersion() >= QtSupport::QtVersionNumber(5, 0, 0) && qmlsceneCommand().isEmpty())
+    if (qtVersion() >= QtVersionNumber(5, 0, 0) && qmlsceneCommand().isEmpty())
         ret << QCoreApplication::translate("QtVersion", "No qmlscene installed.");
-    if (qtVersion() >= QtSupport::QtVersionNumber(4, 7, 0) && qmlviewerCommand().isEmpty())
+    if (qtVersion() >= QtVersionNumber(4, 7, 0) && qmlviewerCommand().isEmpty())
         ret << QCoreApplication::translate("QtVersion", "No qmlviewer installed.");
     return ret;
 }
@@ -87,10 +87,10 @@ QString SimulatorQtVersion::description() const
 
 Core::FeatureSet SimulatorQtVersion::availableFeatures() const
 {
-    Core::FeatureSet features = QtSupport::BaseQtVersion::availableFeatures();
-    if (qtVersion() >= QtSupport::QtVersionNumber(4, 7, 4)) //no reliable test for components, yet.
-           features |= Core::FeatureSet(QtSupport::Constants::FEATURE_QTQUICK_COMPONENTS_MEEGO);
-    features |= Core::FeatureSet(QtSupport::Constants::FEATURE_MOBILE);
+    Core::FeatureSet features = BaseQtVersion::availableFeatures();
+    if (qtVersion() >= QtVersionNumber(4, 7, 4)) //no reliable test for components, yet.
+        features |= Core::FeatureSet(Constants::FEATURE_QTQUICK_COMPONENTS_MEEGO);
+    features |= Core::FeatureSet(Constants::FEATURE_MOBILE);
 
     return features;
 }
@@ -98,5 +98,5 @@ Core::FeatureSet SimulatorQtVersion::availableFeatures() const
 bool SimulatorQtVersion::supportsPlatform(const QString &platformName) const
 {
     return (platformName.isEmpty()
-            || platformName == QLatin1String(QtSupport::Constants::MEEGO_HARMATTAN_PLATFORM));
+            || platformName == QLatin1String(Constants::MEEGO_HARMATTAN_PLATFORM));
 }
